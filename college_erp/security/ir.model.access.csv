@@ -1,0 +1,16 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_student_table,access_student_table,college_erp.model_student_table,base.group_user,1,1,1,1
+access_course_table,access_course_table,model_course_table,base.group_user,1,1,1,1
+access_admission_table,access_admission_table,model_admission_table,base.group_user,1,1,1,1
+access_semester_table,access_semester_table,model_semester_table,base.group_user,1,1,1,1
+access_syllabus_table,access_syllabus_table,model_syllabus_table,base.group_user,1,1,1,1
+access_academic_year,access_academic_year,model_academic_year,base.group_user,1,1,1,1
+access_class_table,access_class_table,model_class_table,base.group_user,1,1,1,1
+access_exam_table,access_exam_table,model_exam_table,base.group_user,1,1,1,1
+access_papers_table,access_papers_table,model_papers_table,base.group_user,1,1,1,1
+access_mark_sheet_table,access_mark_sheet_table,model_mark_sheet_table,base.group_user,1,1,1,1
+access_mark_sheet_papers,access_mark_sheet_papers,model_mark_sheet_papers,base.group_user,1,1,1,1
+access_promotion_table,access_promotion_table,model_promotion_table,base.group_user,1,1,1,1
+access_mark_sheet_report,access_mark_sheet_report,model_mark_sheet_report,base.group_user,1,1,1,1
+
+

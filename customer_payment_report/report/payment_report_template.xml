@@ -1,0 +1,80 @@
+<odoo>
+    <!--  Create a Report Template -->
+    <template id="report_customer_payment">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <center>
+                        <h1>Payment Report</h1>
+                    </center>
+                    <div class="row">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:left;">
+                                        <strong>Serial No.</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>Invoice No.</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>Date</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>Customer Name</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>Tax value</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>CGST</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>SGST</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>IGST</strong>
+                                    </th>
+                                    <th style="text-align:left;">
+                                        <strong>Net amount</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+<!--                                <tr t-foreach="docs" t-as="record">-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record_index + 1"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[0]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[1]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[2]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[3]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[4]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[4]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[5]"/>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <span t-esc="record[6]"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

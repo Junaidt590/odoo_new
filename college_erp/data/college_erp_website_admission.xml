@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    record for admission menu in website-->
+    <record id="website_admission_menu" model="website.menu">
+        <field name="name">Admission</field>
+        <field name="url">/admission</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">90</field>
+    </record>
+</odoo>

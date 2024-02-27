@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="tax_wise_sales_report.TaxReport" owl="1">
+        <style>
+            .scroll{
+                height: 100%;
+                overflow: auto;
+            }
+            .date_div{
+                width: 100px;
+            }
+            .container-fluid{
+               height: 100px;
+               width: 100%;
+            }
+            .date {
+              width: 100%;
+              height: 15px;
+              padding: 12px 20px;
+              border: 2px solid #ccc;
+              border-radius: 4px;
+              background-color: #f8f8f8;
+              font-size: 16px;
+              resize: none;
+            }
+        </style>
+        <div class="scroll">
+        <div class="container ml-2">
+            <div class="container mt-2">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                    <div>
+                        <label for="fromDate">From Date:</label>
+                        <input type="date" id="fromDate" t-model="state.fromDateValue" class="date"/>
+                        <label for="toDate">To Date:</label>
+                        <input type="date" id="toDate" t-model="state.toDateValue" class="date"/>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md">
+                            <button class="btn btn-primary" t-on-click="handleInput">Generate</button>
+                        </div>
+                        <div class="col-md">
+                            <button class="btn btn-primary" t-on-click="action_print_pdf">Print</button>
+                        </div>
+                    </div>
+                    </nav>
+                </div>
+            </div>
+            <br/>
+            <div id="report">
+                 <header>
+            <h2>Tax Wise Sales Report</h2>
+        </header>
+            <t t-foreach="state.taxDetails" t-as="data" t-key="data.tax_id">
+            <div>
+                <br/>
+                <h4>
+                    <t t-esc="data.tax_name"/>
+                </h4>
+            </div>
+                <div>
+            <div class="table_main_view">
+                <table cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Invoice</th>
+                            <th>Taxable Value</th>
+                            <th>SGST</th>
+                            <th>CGST</th>
+                            <th>IGST</th>
+                            <th>Net Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="data['report']" t-as="rec" t-key="rec.id">
+                            <tr style="border: 1px solid black;">
+                                <td style="width: 100px;">
+                                    <t t-esc="rec.invoice"/>
+                                </td>
+                                <td style="width: 100px;">
+                                    <t t-esc="rec.taxable"/>
+                                </td>
+                                <td style="width: 100px;">
+                                    <t t-esc="rec.sgst"/>
+                                </td>
+                                <td style="width: 100px;">
+                                    <t t-esc="rec.cgst"/>
+                                </td>
+                                <td style="width: 100px;">
+                                    <t t-esc="rec.igst"/>
+                                </td>
+                                <td style="width: 100px;">
+                                    <t t-esc="rec.net_amount"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr style="border: 1px solid black;">
+                            <td style="font-weight: bold; width: 100px;">
+                                <t>Total</t>
+                            </td>
+                            <td style="font-weight: bold; width: 100px;">
+                                <t t-esc="data['report'].reduce((acc, rec) => acc + rec.taxable, 0).toFixed(2)"/>
+                            </td>
+                            <td style="font-weight: bold; width: 100px;">
+                                <t t-esc="data['report'].reduce((acc, rec) => acc + rec.sgst, 0).toFixed(2)"/>
+                            </td>
+                            <td style="font-weight: bold; width: 100px;">
+                                <t t-esc="data['report'].reduce((acc, rec) => acc + rec.cgst, 0).toFixed(2)"/>
+                            </td>
+                            <td style="font-weight: bold; width: 100px;">
+                                <t t-esc="data['report'].reduce((acc, rec) => acc + rec.igst, 0).toFixed(2)"/>
+                            </td>
+                            <td style="font-weight: bold; width: 100px;">
+                                <t t-esc="data['report'].reduce((acc, rec) => acc + rec.net_amount, 0).toFixed(2)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </t><br/>
+            <div>
+            <table cellspacing="0" width="100%">
+                <tr style="border: 1px solid black;">
+                    <td style="font-weight: bold; width: 100px;">
+                        <t>Grand Total</t>
+                    </td>
+                    <td style="font-weight: bold; width: 100px;">
+                        <t t-esc="state.taxDetails.reduce((acc, rec) => (acc + rec.report.reduce((accRec, r) => accRec + r.taxable, 0)), 0).toFixed(2)"/>
+                    </td>
+                    <td style="font-weight: bold; width: 100px;">
+                        <t t-esc="state.taxDetails.reduce((acc, rec) => (acc + rec.report.reduce((accRec, r) => accRec + r.sgst, 0)), 0).toFixed(2)"/>
+                    </td>
+                    <td style="font-weight: bold; width: 100px;">
+                        <t t-esc="state.taxDetails.reduce((acc, rec) => (acc + rec.report.reduce((accRec, r) => accRec + r.cgst, 0)), 0).toFixed(2)"/>
+                    </td>
+                    <td style="font-weight: bold; width: 100px;">
+                        <t t-esc="state.taxDetails.reduce((acc, rec) => (acc + rec.report.reduce((accRec, r) => accRec + r.igst, 0)), 0).toFixed(2)"/>
+                    </td>
+                    <td style="font-weight: bold; width: 100px;">
+                        <t t-esc="state.taxDetails.reduce((acc, rec) => (acc + rec.report.reduce((accRec, r) => accRec + r.net_amount, 0)), 0).toFixed(2)"/>
+                    </td>
+                </tr>
+            </table>
+            </div>
+            </div>
+        </div>
+        <br/>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,10 @@
+<odoo>
+    <!--  report action -->
+    <record id="action_payment_report" model="ir.actions.report">
+        <field name="name">Customer Payment Report</field>
+        <field name="model">payment.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_payment_report.report_customer_payment</field>
+        <field name="report_file">customer_payment_report.report_customer_payment</field>
+    </record>
+</odoo>

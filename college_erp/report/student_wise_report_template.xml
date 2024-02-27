@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--template for student wise report-->
+    <template id="student_wise_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div>
+                        <t t-foreach="students_data" t-as="data">
+                            <div class="text-center">
+                                <span>
+                                    <t t-esc="data['details'].get('name')"/>
+                                    <span>:Mark List</span>
+                                    <br></br>
+                                    <t t-esc="data['details'].get('course')"/>
+                                    <span>:</span>
+                                    <t t-esc="data['details'].get('academic_year')"/>
+                                </span>
+                            </div>
+                            <span>Exam:</span>
+                            <t t-esc="data['details'].get('exam_type')"/>
+                            <br></br>
+                            <span>Result:</span>
+                            <t t-if="data['details'].get('result')">
+                                <span>Pass</span>
+                            </t>
+                            <t t-else="">
+                                <span>Failed</span>
+                            </t>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th width="300dp">Subject</th>
+                                        <th width="300dp">Mark</th>
+                                        <th width="300dp">Pass Mark</th>
+                                        <th width="300dp">Pass/Fail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['report']" t-as="record">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="record['subject']"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="record['mark']"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="record['pass_mark']"/>
+                                            </td>
+                                            <td>
+                                                <t t-if="record['result']">
+                                                    <span>Pass</span>
+                                                </t>
+                                                <t t-else="">
+                                                    <span>Failed</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+    <!--record for action student wise report-->
+    <record id="student_wise_report" model="ir.actions.report">
+        <field name="name">Student Mark Sheet</field>
+        <field name="model">mark.sheet.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">college_erp.student_wise_report_template</field>
+        <field name="report_file">college_erp.student_wise_report_template</field>
+        <field name="print_report_name">'Student-Mark-Sheet'</field>
+    </record>
+</odoo>

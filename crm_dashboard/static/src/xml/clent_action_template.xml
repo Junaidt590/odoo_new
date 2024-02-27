@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="CrmDashboard" owl="1">
+        <style>
+            body{
+                background:#FAFAFA;
+            }
+            .order-card {
+                color: #fff;
+            }
+
+            .bg-c-blue {
+                background: linear-gradient(45deg,#4099ff,#73b4ff);
+            }
+
+            .bg-c-green {
+                background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+            }
+
+            .bg-c-yellow {
+                background: linear-gradient(45deg,#FFB64D,#ffcb80);
+            }
+
+            .bg-c-pink {
+                background: linear-gradient(45deg,#FF5370,#ff869a);
+            }
+            .bg-c-green1{
+                background: linear-gradient(90deg, rgba(169,232,139,1) 0%, rgba(140,237,187,0.9220063025210083) 36%, rgba(89,192,213,0.8715861344537815) 100%);
+            }
+
+            .card {
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                border: none;
+                margin-bottom: 30px;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                height: 100px;
+            }
+
+            .card .card-block {
+                padding: 25px;
+            }
+
+            .order-card i {
+                font-size: 26px;
+            }
+
+            .f-left {
+                float: left;
+            }
+
+            .f-right {
+                float: right;
+            }
+            .card:hover{
+                transform: scale(1.09);
+                background: rgb(193, 166, 219);
+            }
+            select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                border: none;
+                border-bottom: 1px solid #000;
+            }
+            .select-container{
+                display: flex;
+                justify-content: flex-end;
+            }
+            .main-dashboard{
+                height: 100%;
+                overflow: auto;
+            }
+            .graph-title{
+                font-size:bold;
+                font-size:15px
+            }
+            .fade-in {
+              animation: fade-in 4s;
+            }
+
+            @keyframes fade-in {
+              from {
+                opacity: 0;
+              }
+
+              to {
+                opacity: 1;
+              }
+            }
+        </style>
+        <div class="main-dashboard">
+        <header class="p-3">
+            <h1>CRM DASHBOARD</h1>
+        </header>
+
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                  rel="stylesheet"/>
+            <div class="container mt-4">
+            <div class="select-container">
+                <select id="filter-select" class="p-2 col-md-4"
+                        aria-label="Default select example"
+                        t-model='state.selectVal' t-on-change="changeFilter">
+                  <option value="all">Open this select menu</option>
+                    <option value="This year">This Year</option>
+                    <option value="This quarter">This Quarter</option>
+                    <option value="This month">This Month</option>
+                    <option value="This week">This Week</option>
+                </select>
+            </div>
+                <div class="row mt-5 fade-in">
+                <div class="col-md col-xl"
+                     t-on-click="() => getMyLeadsAndOpp(this,'lead')">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">My Leads</h6>
+                            <h2 class="text-right"><i class="fa fa-cart-plus f-left"/>
+                                <span id="my-lead"/></h2>
+                            <!--                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>-->
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-md col-xl"
+                         t-on-click="() => getMyLeadsAndOpp(this,'opportunity')">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">My Opportunities</h6>
+                            <h2 class="text-right"><i class="fa fa-rocket f-left"></i>
+                                <span id="my-opportunity"/></h2>
+                            <!--                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>-->
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-md col-xl">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Expected Revenue</h6>
+                            <h2 class="text-right"><i class="currency_id"/>
+                                <span id="expected-revenue"/></h2>
+                            <!--                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>-->
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-md col-xl">
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Revenue</h6>
+                            <h2 class="text-right"><i class="currency_id"/>
+                                <span id="revenue"/></h2>
+                            <!--                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>-->
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-md col-xl">
+                    <div class="card bg-c-green1 order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20">Win Ratio</h6>
+                            <h2 class="text-right"><span id="win-ratio"/>
+                                <i>%</i></h2>
+                            <!--                            <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!--            <div>-->
+                <!--                <i><span class="graph-title">Lost Lead/Opportunity Graph</span></i>-->
+                <!--                <canvas id="myChart" width="400" height="100"/>-->
+                <!--            </div>-->
+                <div class="row">
+                    <div class="col-md-8 p-5">
+                        <i><span class="graph-title">Lost Lead/Opportunity Graph</span></i>
+                        <canvas id="myChart" width="400" height="190"/>
+                    </div>
+                        <div class="col-md-4 p-5">
+                        <i><span class="graph-title">Activity Pie Chart</span></i>
+                            <canvas id="myPieChart" width="200" height="50"/>
+                    </div>
+                </div>
+                <div>
+                    <ul>
+                    <t t-foreach="state.thisMonthTableData" t-as="lead" t-key="lead.id">
+                        <li>
+                            <span t-esc="lead.name"/>
+                        </li>
+
+                    </t>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </t>
+</templates>

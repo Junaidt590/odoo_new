@@ -1,0 +1,13 @@
+<odoo>
+    <record id="payment_report_action" model="ir.actions.act_window">
+        <field name="name">Payment Report</field>
+        <field name="res_model">payment.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="payment_report_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+    <data>
+        <menuitem id="payment_report_first_level_menu" parent="account.menu_finance_reports"
+                  name="Customer Payment Report" sequence="4" action="payment_report_action"/>
+    </data>
+</odoo>
